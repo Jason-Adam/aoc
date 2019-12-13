@@ -40,25 +40,44 @@ func prepInput(f string) ([]int, error) {
 	return nil, nil
 }
 
+// makeRange creates a slice of ints from min to max.
+func makeRange(min, max int) []int {
+	a := make([]int, max-min+1)
+	for i := range a {
+		a[i] = min + i
+	}
+	return a
+}
+
 func main() {
 	s, err := prepInput("input.txt")
 	if err != nil {
 		fmt.Println(err)
 	}
-	s[1] = 12
-	s[2] = 2
-	i := 0
-	for s[i] != 99 {
-		a := s[i+1]
-		b := s[i+2]
-		c := s[i+3]
-		switch s[i] {
-		case 1:
-			s[c] = s[a] + s[b]
-		case 2:
-			s[c] = s[a] * s[b]
+	noun := makeRange(0, 99)
+	verb := makeRange(0, 99)
+	for _, n := range noun {
+		for _, v := range verb {
+			sc := make([]int, len(s))
+			copy(sc, s)
+			sc[1] = n
+			sc[2] = v
+			i := 0
+			for sc[i] != 99 {
+				a := sc[i+1]
+				b := sc[i+2]
+				c := sc[i+3]
+				switch sc[i] {
+				case 1:
+					sc[c] = sc[a] + sc[b]
+				case 2:
+					sc[c] = sc[a] * sc[b]
+				}
+				i += 4
+			}
+			if sc[0] == 19690720 {
+				fmt.Println(100*n + v)
+			}
 		}
-		i += 4
 	}
-	fmt.Println(s[0])
 }
