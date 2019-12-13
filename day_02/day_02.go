@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// sliceAtoi converts a list of strings to ints.
+// sliceAtoi converts a slice of strings to ints.
 func sliceAtoi(sa []string) ([]int, error) {
 	var sint = []int{}
 	for _, i := range sa {

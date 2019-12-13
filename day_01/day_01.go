@@ -10,6 +10,7 @@ import (
 
 var fuel int64 = 0
 
+// calcFuel recursively calculates the fuel usage.
 func calcFuel(n int64) {
 	reduced := (n / 3) - 2
 	if reduced <= 0 {
